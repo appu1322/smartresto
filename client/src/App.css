@@ -1,10 +1,9 @@
 /* navBar  */
 #web-title{
-    font-family: 'Comforter', cursive;
     font-family: 'Pacifico', cursive;
 }
 
-.navbar-expand-lg{
+.user .navbar-expand-lg{
     position: absolute;
 }
 
@@ -46,7 +45,8 @@
 
 /* Foodlist  */
 #foodlist-title{
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Yellowtail', cursive;
+    font-weight: bold;
 }
 
 /* Baket NavBar  */

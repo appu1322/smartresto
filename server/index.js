@@ -5,6 +5,8 @@ const app = express();
 
 // linked dotenv.config.env file with node app 
 dotenv.config({path:'./config.env'});
+
+// Stablish connection 
 require('./db/connection');
 
 app.use(express.json()); 
