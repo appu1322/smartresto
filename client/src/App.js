@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import User from "./components/user/User";
 import Basket from "./components/user/Basket/Basket";
 import Dashboard from "./components/admin/Dashboard";
+import Login from './components/login/Login';
 export default class App extends Component {
   render() {
     return (
@@ -12,7 +13,8 @@ export default class App extends Component {
           <Routes>
 
             {/* user pages  */}
-            <Route exact path="/" element={<User category="fastfood"/>}/>
+            <Route exact path="/" element={<Login/>}/>
+            <Route exact path="/home" element={<User category="fastfood"/>}/>
             <Route exact path="/breakfast" element={<User category="breakfast"/>}/>
             <Route exact path="/lunch" element={<User category="lunch"/>}/>
             <Route exact path="/dinner" element={<User category="dinner"/>}/>

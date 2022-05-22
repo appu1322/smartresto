@@ -9,7 +9,7 @@ const NavBar = () => {
             <div className='user'>
                 <nav className="navbar navbar-expand-lg navbar-light ">
                     <div className="container-fluid">
-                        <Link className="navbar-brand text-success" id="web-title" to="/">SmartResto</Link>
+                        <Link className="navbar-brand text-success" id="web-title" to="/home">SmartResto</Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>

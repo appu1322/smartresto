@@ -22,9 +22,7 @@ const Basketorders = () => {
             price = price + (item.price * item.qty)
         }
         setTotalAmount(price)
-
-        socket.emit('create-connection')
-    }, [])
+    })
 
     const removeFood = (id) => {
         dispatch(remove(id));
@@ -36,6 +34,17 @@ const Basketorders = () => {
 
     const handleQuantity = (currentId, qty) => {
         dispatch(update({ id: currentId, qty }))
+    }
+
+    const placeOrder = () => {
+        const payload = {
+            table: foodItem.table,
+            items: foodItem.item,
+            status:"new",
+            totalAmount
+        };
+
+        socket.emit('place-order', payload)
     }
 
 
@@ -136,7 +145,7 @@ const Basketorders = () => {
                             </div>
                             <div className="text-end mt-4">
                                 { paymentMethod === "cash" ?
-                                <button className="btn btn-primary">Confirm Order</button>
+                                <button className="btn btn-primary" onClick={placeOrder} data-bs-dismiss="modal">Confirm Order</button>
                                 :
                                 <button disabled className="btn btn-primary">Confirm Order</button>
                                 }

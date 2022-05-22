@@ -15,8 +15,10 @@ io.on('connection', (Socket) =>{
     console.log("socket connect succesfull")
   })
 
-  Socket.on('order', (payload) =>{
-    Socket.broadcast.emit('recieve', {name:users[Socket.id], message:payload.message})
+  Socket.on('place-order', (payload) =>{
+    console.log(payload)
+    Socket.broadcast.emit('receive-order', payload)
+    // Socket.broadcast.emit('recieve', {name:users[Socket.id], message:payload.message})
   })
 
   Socket.on("disconnect", () => {

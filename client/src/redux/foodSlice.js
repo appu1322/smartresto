@@ -2,8 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const foodSlice = createSlice({
   name: 'foods',
-  initialState: { table: 1, item: [] },
+  initialState: { table: parseInt(localStorage.getItem("table")), item: [] },
   reducers: {
+    changeTable: (state, action) => (
+      { ...state, table: parseInt(action.payload) }
+    ),
     add: (state, action) => (
       { ...state, item: [...state.item, action.payload] }
     ),
@@ -20,5 +23,5 @@ export const foodSlice = createSlice({
   }
 })
 
-export const { add, update, remove } = foodSlice.actions;
+export const { changeTable, add, update, remove } = foodSlice.actions;
 export default foodSlice.reducer;
