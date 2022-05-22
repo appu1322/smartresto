@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { update, remove } from '../../../redux/foodSlice';
+import Empty from '../images/empty.png';
 import BasketItem from './BasketItem';
 import PriceList from './PriceList';
+import {io} from "socket.io-client";
+const ENDPOINT = "http://localhost:5501";
+const socket = io(ENDPOINT);
 
-import Empty from '../images/empty.png';
 
 const Basketorders = () => {
     const [currentId, setCurrentId] = useState('')
     const [totalAmount, setTotalAmount] = useState('')
+    const [paymentMethod, setPaymentMethod] = useState('cash')
     const foodItem = useSelector((state) => state.foods);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const empty = document.getElementById('empty')
-        if (foodItem.item.length > 0) {
-            empty.style.display = 'none'
-        } else {
-            empty.style.display = 'inherit'
-        }
-
         let price = 0;
         for (let item of foodItem.item) {
             price = price + (item.price * item.qty)
         }
         setTotalAmount(price)
-    })
+
+        socket.emit('create-connection')
+    }, [])
 
     const removeFood = (id) => {
         dispatch(remove(id));
@@ -42,9 +41,6 @@ const Basketorders = () => {
 
     return (
         <div className="order-session container">
-            <div id='empty' style={{height: "calc(100vh - 70px)"}}>
-                <img src={Empty} alt="" width="100%" height="100%" />
-            </div>
             {foodItem.item.length > 0 ?
                 <div className="row">
 
@@ -73,7 +69,11 @@ const Basketorders = () => {
                         <button className="btn btn-success mt-5 w-100" data-bs-toggle="modal" data-bs-target="#order">Place Order</button>
                     </div>
                 </div>
-            : ""}
+                :
+                <div id='empty' style={{ height: "calc(100vh - 70px)" }}>
+                    <img src={Empty} alt="" width="100%" height="100%" />
+                </div>
+            }
 
             {/* <!-- Modal --> */}
             <div className="modal fade" id="quantity" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -114,8 +114,32 @@ const Basketorders = () => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <div className="dialogs-base-list d-flex justify-content-between">
-                                Cash
+                            <div className="form-check">
+                                { paymentMethod === "cash" ? 
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="cash" checked onClick={() => setPaymentMethod("cash")}/>
+                                :
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="cash" onClick={() => setPaymentMethod("cash")}/>
+                                }
+                                    <label className="form-check-label" for="flexRadioDefault1">
+                                        Cash
+                                    </label>
+                            </div>
+                            <div className="form-check mt-2">
+                                { paymentMethod === "gpay" ?
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="gpay" checked onClick={() => setPaymentMethod("gpay")} />
+                                :
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="gpay" onClick={() => setPaymentMethod("gpay")} />
+                                }
+                                    <label className="form-check-label" for="flexRadioDefault2">
+                                        Google Pay
+                                    </label>
+                            </div>
+                            <div className="text-end mt-4">
+                                { paymentMethod === "cash" ?
+                                <button className="btn btn-primary">Confirm Order</button>
+                                :
+                                <button disabled className="btn btn-primary">Confirm Order</button>
+                                }
                             </div>
                         </div>
                     </div>

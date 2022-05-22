@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react'
 import home from "./images/home4.jpg"
 
 const Home = () => {
-    const dispatch = useDispatch();
-
     const scrollDown = () => {
         let winSize = document.getElementById("home-session");
         window.scrollTo({ top: winSize.offsetHeight, behaviour: 'smooth' })

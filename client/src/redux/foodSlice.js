@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const foodSlice = createSlice({
   name: 'foods',
-  initialState: { item: [] },
+  initialState: { table: 1, item: [] },
   reducers: {
     add: (state, action) => (
       { ...state, item: [...state.item, action.payload] }

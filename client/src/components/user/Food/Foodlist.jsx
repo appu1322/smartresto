@@ -8,24 +8,25 @@ const Foodlist = (props) => {
     const foodItem = useSelector((state) => state.foods);
     const dispatch = useDispatch();
 
-    useState(async () => {
-        try {
-            const res = await fetch('/get', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-            const Data = await res.json();
-            setFoods(Data)
-
-            for (let item of foodItem.item) {
-                hideButton(item.id)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch('/get', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                const Data = await res.json();
+                setFoods(Data)
+                for (let item of foodItem.item) {
+                    hideButton(item.id)
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
-
+        fetchData();
     }, [])
 
     const hideButton = (id) => {
@@ -45,7 +46,7 @@ const Foodlist = (props) => {
             <div className="row">
                 <h1 className="text-center" id="foodlist-title">{props.subcategory.toUpperCase()}</h1>
                 {foods && foods.map((element, i) => {
-                    return <FoodItem element={element} addFood={addFood}/>
+                    return <FoodItem key={i} element={element} addFood={addFood}/>
                 })}
             </div>
         </div>

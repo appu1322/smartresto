@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import User from "./components/user/User";
 import Basket from "./components/user/Basket/Basket";
 import Dashboard from "./components/admin/Dashboard";
-
 export default class App extends Component {
   render() {
     return (
