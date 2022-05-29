@@ -7,7 +7,7 @@ export default class BasketNav extends Component {
         return (
             <div className="basket-session container-fluid">
                 <div className="nav d-flex justify-content-between align-items-center bg-light">
-                    <Link className="title text-success" to="/">Smart Resto</Link>
+                    <Link className="title text-success" to="/home">Smart Resto</Link>
                     <ol className="checkout-steps p-0 m-0">
                         <li className="step step1">Order</li>
                         <li className="divider"></li>

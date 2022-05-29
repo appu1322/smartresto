@@ -10,7 +10,7 @@ function FoodItem(props) {
                 <div className="card bg-light mb-3" style={{ width: "18rem" }}>
                     <img src={c} className="card-img-top" alt="..." />
                     <div className="card-body">
-                        <p className="card-text">{element.desc}</p>
+                        <p className="card-text">{element.desc.slice(0,50)}...</p>
                         <h5 className="card-title text-center">{element.name}</h5>
                         <h5 className="card-title text-center text-danger">₹ {element.price}/-</h5>
                         <div className="text-center">

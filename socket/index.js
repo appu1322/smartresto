@@ -16,9 +16,7 @@ io.on('connection', (Socket) =>{
   })
 
   Socket.on('place-order', (payload) =>{
-    console.log(payload)
     Socket.broadcast.emit('receive-order', payload)
-    // Socket.broadcast.emit('recieve', {name:users[Socket.id], message:payload.message})
   })
 
   Socket.on("disconnect", () => {

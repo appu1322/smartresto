@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import User from "./components/user/User";
 import Basket from "./components/user/Basket/Basket";
-import Dashboard from "./components/admin/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
+import Admin from "./components/SuperAdmin/layout/Layout";
 import Login from './components/login/Login';
-export default class App extends Component {
-  render() {
-    return (
-      <div>
+
+function App() {
+  return (
+    <div>
         <Router>
           <Routes>
 
@@ -27,11 +28,13 @@ export default class App extends Component {
             <Route exact path="/basket" element={<Basket/>}/>
 
             {/* admin page  */}
-            <Route exact path="/admin" element={<Dashboard/>}/>
+            <Route exact path="/dashboard" element={<Dashboard />}/>
+            <Route exact path="/admin" element={<Admin />}/>
               
           </Routes>
         </Router>
       </div>
-    )
-  }
+  )
 }
+
+export default App
